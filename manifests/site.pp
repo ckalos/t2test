@@ -6,7 +6,7 @@ package { 'php':
   ensure => installed,
 }
 
-file { "/var/www/html/index.php"
+file { "/var/www/html/index.php":
   ensure => present,
   source => "puppet:///modules/httpd/docroot/index.php",
 }
