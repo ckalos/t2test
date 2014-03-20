@@ -1,4 +1,4 @@
-include puppet-iptables
+#include iptables
 
 package { 'httpd':
   ensure => installed,
@@ -22,25 +22,34 @@ service { 'httpd':
   enable => true,
 }
 
-iptables { "Allow ICMP":
-  proto => "icmp",
-  icmp => "any",
-  jump => "ACCEPT",
+service { 'iptables':
+  ensure => stopped,
+  enable => false,
 }
 
-iptables { "Allow HTTP":
-  proto => "tcp",
-  dport => "80",
-  jump => "ACCEPT",
-}
+## Commented out because the iptables module doesn't seem to load properly.
+## If you re-enable this, make sure that the module is included.
+## Don't forget to re-enable/ensure that iptables is running!
 
-iptables { "Allow SSH":
-  proto => "tcp",
-  dport => "22",
-  jump => "ACCEPT",
-}
-
-iptables { "Reject the rest":
-  proto => "all",
-  jump => "REJECT",
-}
+#iptables { "Allow ICMP":
+#  proto => "icmp",
+#  icmp => "any",
+#  jump => "ACCEPT",
+#}
+#
+#iptables { "Allow HTTP":
+#  proto => "tcp",
+#  dport => "80",
+#  jump => "ACCEPT",
+#}
+#
+#iptables { "Allow SSH":
+#  proto => "tcp",
+#  dport => "22",
+#  jump => "ACCEPT",
+#}
+#
+#iptables { "Reject the rest":
+#  proto => "all",
+#  jump => "REJECT",
+#}
