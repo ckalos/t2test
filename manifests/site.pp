@@ -6,6 +6,10 @@ package { 'php':
   ensure => installed,
 }
 
+package { 'elinks':
+  ensure => installed,
+}
+
 file { "/var/www/html/index.php":
   ensure => present,
   source => "puppet:///modules/httpd/docroot/index.php",
